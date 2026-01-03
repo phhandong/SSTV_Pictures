@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Satellite body -->
+  <rect x="24" y="24" width="16" height="16" fill="url(#grad)" rx="2"/>
+  <!-- Solar panels -->
+  <rect x="10" y="26" width="12" height="12" fill="#3498db" opacity="0.8"/>
+  <rect x="42" y="26" width="12" height="12" fill="#3498db" opacity="0.8"/>
+  <!-- Antenna -->
+  <line x1="32" y1="24" x2="32" y2="14" stroke="url(#grad)" stroke-width="2"/>
+  <circle cx="32" cy="12" r="3" fill="#667eea"/>
+  <!-- Signal waves -->
+  <path d="M 32 42 Q 26 48 20 54" stroke="#764ba2" stroke-width="1.5" fill="none" opacity="0.6"/>
+  <path d="M 32 42 Q 38 48 44 54" stroke="#764ba2" stroke-width="1.5" fill="none" opacity="0.6"/>
+</svg>
