@@ -7,7 +7,14 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write # ← 必须
+  contents: write
+  pages: write # ← 新增：允许部署 Pages
+  id-token: write # ← 新增：验证身份
+
+# 新增：控制并发，防止多次推送冲突
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
 
 jobs:
   generate-data:
@@ -33,3 +40,52 @@ jobs:
           commit_message: 'Automated: Update gallery data'
           file_pattern: data/gallery-data.json
           skip_fetch: true
+
+      - name: Process Feishu Temp Files
+        run: |
+          mkdir -p images/feishu_tmp
+          find images/feishu_tmp -name "*.tmp" | while read tmp_file; do
+            url=$(cat "$tmp_file" | tr -d '[:space:]')
+            filename=$(basename "$tmp_file")
+            # Extract target folder name: between first '_' and last '.'
+            # Example: file_TargetFolder.tmp -> TargetFolder
+            target_key=$(echo "$filename" | sed -n 's/^[^_]*_\(.*\)\.[^.]*$/\1/p')
+            
+            if [ -n "$target_key" ]; then
+              # Find matching directory in images/
+              target_dir=$(find images -maxdepth 1 -type d -name "*$target_key*" | head -n 1)
+              
+              if [ -n "$target_dir" ]; then
+                echo "Downloading $url to $target_dir/$(basename "$url" | cut -d'?' -f1)"
+                curl -L -o "$target_dir/$(basename "$url" | cut -d'?' -f1)" "$url"
+                rm "$tmp_file"
+              else
+                echo "Target directory matching '$target_key' not found for $tmp_file"
+              fi
+            else
+              echo "Could not parse target key from $filename"
+            fi
+          done
+
+      - name: Commit Downloaded Images
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'Automated: Download images from Feishu tmp links'
+          file_pattern: 'images/**'
+          skip_fetch: true
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: generate-data
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
