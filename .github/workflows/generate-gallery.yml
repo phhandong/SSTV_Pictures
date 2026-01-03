@@ -45,14 +45,15 @@ jobs:
         run: |
           mkdir -p images/feishu_tmp
           find images/feishu_tmp -name "*.tmp" | while read tmp_file; do
-            # Read content, remove newlines only (preserve spaces in filenames)
+            # Read content, remove newlines/returns
             content=$(cat "$tmp_file" | tr -d '\n' | tr -d '\r')
             
             # Parse URL and Filename (format: url:filename)
-            # Take everything before the last colon as URL
             url=${content%:*}
-            # Take everything after the last colon as filename
-            save_name=${content##*:}
+            original_filename=${content##*:}
+            
+            # Extract extension from original filename (e.g. png from image.png)
+            extension="${original_filename##*.}"
             
             filename=$(basename "$tmp_file")
             # Extract target folder name: between first '_' and last '.'
@@ -64,6 +65,10 @@ jobs:
               target_dir=$(find images -maxdepth 1 -type d -name "*$target_key*" | head -n 1)
               
               if [ -n "$target_dir" ]; then
+                # Generate filename: Timestamp_TargetKey.Extension
+                timestamp=$(date +%Y%m%d%H%M%S)
+                save_name="${timestamp}_${target_key}.${extension}"
+                
                 echo "Downloading $url to $target_dir/$save_name"
                 curl -L -o "$target_dir/$save_name" "$url"
                 
