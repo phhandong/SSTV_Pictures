@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,129 +10,213 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
         }
-        
+
         body {
-        
             color: #333;
             line-height: 1.6;
             padding: 20px;
             min-height: 100vh;
+            background-color: #f8f9fa;
         }
-        
+
         .container {
-            max-width: 1200px;
+            width: 100%;
+            max-width: 1600px;
             margin: 0 auto;
+            padding: 0 10px;
         }
-        
+
         header {
             text-align: center;
-            margin-bottom: 40px;
-            padding: 30px;
+            margin-bottom: 30px;
+            padding: 40px 20px;
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
-        
+
         h1 {
             color: #2c3e50;
             margin-bottom: 10px;
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
-        
+
         .folder-section {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             overflow: hidden;
         }
-        
+
         .folder-title {
-            background: linear-gradient(45deg, #3498db, #9b59b6);
+            background: linear-gradient(135deg, #3498db, #8e44ad);
             color: white;
-            padding: 20px;
-            font-size: 1.4rem;
+            padding: 15px 20px;
+            font-size: 1.2rem;
             font-weight: 600;
+            letter-spacing: 0.5px;
         }
-        
+
         .images-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
             padding: 20px;
         }
-        
+
         .image-item {
             background: white;
+            border-radius: 8px;
             overflow: hidden;
-            transition: transform 0.3s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #eee;
         }
-        
+
         .image-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .image-wrapper {
-            height: 200px;
+            aspect-ratio: 4/3;
+            height: auto;
             overflow: hidden;
+            background-color: #f1f1f1;
         }
-        
+
         .image-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
-        
+
+        .image-item:hover .image-wrapper img {
+            transform: scale(1.05);
+        }
+
         .image-name {
-            padding: 12px;
+            padding: 10px;
             text-align: center;
-            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #555;
+            border-top: 1px solid #f0f0f0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        
+
         .loading {
             text-align: center;
             padding: 40px;
             color: #7f8c8d;
         }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            color: #95a5a6;
+            font-size: 0.85rem;
+            border-top: 1px solid #e1e1e1;
+        }
+
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        .emoji-reset {
+            /* 强制使用 Emoji 字体并重置颜色，防止被父级白色覆盖 */
+            font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            color: initial;
+            font-weight: normal;
+            margin-right: 4px;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            header {
+                padding: 25px 15px;
+                margin-bottom: 20px;
+            }
+
+            .folder-title {
+                padding: 12px 15px;
+                font-size: 1.1rem;
+            }
+
+            .images-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .image-name {
+                font-size: 0.8rem;
+                padding: 8px 5px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
             <h1>SSTV GALLERY☄</h1>
-            <p>Received by BD8CKF</p>
+            <p>Received by BG2GZW</p>
         </header>
-        
+
         <div id="folders-container">
             <div class="loading">正在加载图片...</div>
         </div>
+
+        <footer>
+            <p>本页面修改自 BD8CKF 开源项目 <a href="https://github.com/troilus/sstvgallery" target="_blank">SSTV Gallery</a></p>
+        </footer>
     </div>
 
     <script>
-        async function loadGallery() {
+        async function loadGallery () {
             try {
                 const response = await fetch('data/gallery-data.json');
                 const data = await response.json();
                 displayGallery(data);
             } catch (error) {
                 console.error('加载失败:', error);
-                document.getElementById('folders-container').innerHTML = 
+                document.getElementById('folders-container').innerHTML =
                     '<div class="loading">加载失败，请检查数据文件</div>';
             }
         }
 
-        function displayGallery(data) {
+        function displayGallery (data) {
             const container = document.getElementById('folders-container');
             container.innerHTML = '';
 
             for (const [folderName, images] of Object.entries(data)) {
                 const folderSection = document.createElement('div');
                 folderSection.className = 'folder-section';
-                
+
+                // 处理标题，包裹 emoji 以显示原色
+                const displayTitle = folderName.replace(/🛰/g, '<span class="emoji-reset">🛰</span>');
+
                 folderSection.innerHTML = `
-                    <div class="folder-title">${folderName}</div>
+                    <div class="folder-title">${displayTitle}</div>
                     <div class="images-container">
                         ${images.map(image => `
                             <div class="image-item">
@@ -143,7 +228,7 @@
                         `).join('')}
                     </div>
                 `;
-                
+
                 container.appendChild(folderSection);
             }
         }
@@ -152,4 +237,5 @@
         loadGallery();
     </script>
 </body>
+
 </html>
