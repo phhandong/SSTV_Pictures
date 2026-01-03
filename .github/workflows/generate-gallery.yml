@@ -45,7 +45,15 @@ jobs:
         run: |
           mkdir -p images/feishu_tmp
           find images/feishu_tmp -name "*.tmp" | while read tmp_file; do
-            url=$(cat "$tmp_file" | tr -d '[:space:]')
+            # Read content, remove newlines only (preserve spaces in filenames)
+            content=$(cat "$tmp_file" | tr -d '\n' | tr -d '\r')
+            
+            # Parse URL and Filename (format: url:filename)
+            # Take everything before the last colon as URL
+            url=${content%:*}
+            # Take everything after the last colon as filename
+            save_name=${content##*:}
+            
             filename=$(basename "$tmp_file")
             # Extract target folder name: between first '_' and last '.'
             # Example: file_TargetFolder.tmp -> TargetFolder
@@ -56,14 +64,14 @@ jobs:
               target_dir=$(find images -maxdepth 1 -type d -name "*$target_key*" | head -n 1)
               
               if [ -n "$target_dir" ]; then
-                echo "Downloading to $target_dir"
-                # Enter target directory to save file there
-                pushd "$target_dir" > /dev/null
-                # Use -J to use header-provided filename, -O to save locally
-                curl -L -J -O "$url"
-                # Return to root directory
-                popd > /dev/null
-                rm "$tmp_file"
+                echo "Downloading $url to $target_dir/$save_name"
+                curl -L -o "$target_dir/$save_name" "$url"
+                
+                if [ $? -eq 0 ]; then
+                  rm "$tmp_file"
+                else
+                  echo "Failed to download $url"
+                fi
               else
                 echo "Target directory matching '$target_key' not found for $tmp_file"
               fi
