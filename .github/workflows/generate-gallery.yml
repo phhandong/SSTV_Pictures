@@ -56,8 +56,13 @@ jobs:
               target_dir=$(find images -maxdepth 1 -type d -name "*$target_key*" | head -n 1)
               
               if [ -n "$target_dir" ]; then
-                echo "Downloading $url to $target_dir/$(basename "$url" | cut -d'?' -f1)"
-                curl -L -o "$target_dir/$(basename "$url" | cut -d'?' -f1)" "$url"
+                echo "Downloading to $target_dir"
+                # Enter target directory to save file there
+                pushd "$target_dir" > /dev/null
+                # Use -J to use header-provided filename, -O to save locally
+                curl -L -J -O "$url"
+                # Return to root directory
+                popd > /dev/null
                 rm "$tmp_file"
               else
                 echo "Target directory matching '$target_key' not found for $tmp_file"
