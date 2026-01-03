@@ -8,10 +8,9 @@ on:
 
 permissions:
   contents: write
-  pages: write # ← 新增：允许部署 Pages
-  id-token: write # ← 新增：验证身份
+  pages: write
+  id-token: write
 
-# 新增：控制并发，防止多次推送冲突
 concurrency:
   group: 'pages'
   cancel-in-progress: false
@@ -30,17 +29,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Generate gallery data
-        run: |
-          python generate_data.py
-
-      - name: Commit and Push
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: 'Automated: Update gallery data'
-          file_pattern: data/gallery-data.json
-          skip_fetch: true
-
+      # 1. 调整顺序：先处理下载，确保图片存在
       - name: Process Feishu Temp Files
         run: |
           mkdir -p images/feishu_tmp
@@ -90,11 +79,17 @@ jobs:
             fi
           done
 
-      - name: Commit Downloaded Images
+      # 2. 调整顺序：图片下载完成后，再生成 JSON 数据
+      - name: Generate gallery data
+        run: |
+          python generate_data.py
+
+      # 3. 统一提交：同时提交下载的图片和生成的 JSON
+      - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: 'Automated: Download images from Feishu tmp links'
-          file_pattern: 'images/**'
+          commit_message: 'Automated: Process images and update gallery data'
+          file_pattern: 'images/** data/gallery-data.json'
           skip_fetch: true
 
       - name: Upload artifact
