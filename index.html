@@ -43,6 +43,41 @@
             font-size: clamp(1.8rem, 5vw, 2.5rem);
             font-weight: 700;
             letter-spacing: -0.5px;
+            /* 居中对齐 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .sstv-text {
+            /* 艺术配色：蓝紫渐变 */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* 增加间隙 */
+            margin-right: 0.6em;
+        }
+
+        .comet-icon {
+            /* 字体更小 */
+            font-size: 0.5em;
+            margin-left: 8px;
+            vertical-align: super;
+        }
+
+        header p a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+            border-bottom: 1px dashed #3498db;
+        }
+
+        header p a:hover {
+            color: #2980b9;
+            border-bottom-style: solid;
         }
 
         .folder-section {
@@ -178,8 +213,12 @@
 <body>
     <div class="container">
         <header>
-            <h1>SSTV GALLERY☄</h1>
-            <p>Received by BG2GZW</p>
+            <h1>
+                <span class="sstv-text">SSTV</span>
+                <span>GALLERY</span>
+                <span class="comet-icon">☄</span>
+            </h1>
+            <p>Received by <a href="https://github.com/phhandong" target="_blank">BG2GZW</a></p>
         </header>
 
         <div id="folders-container">
@@ -187,7 +226,8 @@
         </div>
 
         <footer>
-            <p>本页面修改自 BD8CKF 开源项目 <a href="https://github.com/troilus/sstvgallery" target="_blank">SSTV Gallery</a></p>
+            <p>本页面 Fork 自 BD8CKF 开源项目 <a href="https://github.com/troilus/sstvgallery" target="_blank">SSTV Gallery</a>
+            </p>
         </footer>
     </div>
 
