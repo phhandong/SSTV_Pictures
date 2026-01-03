@@ -63,23 +63,27 @@ jobs:
             
             if [ -n "$target_key" ]; then
               # Find matching directory in images/
-              target_dir=$(find images -maxdepth 1 -type d -name "*$target_key*" | head -n 1)
+              # Use -iname instead of -name for case-insensitive matching (e.g. ARCTICSAT vs Arcticsat)
+              target_dir=$(find images -maxdepth 1 -type d -iname "*$target_key*" | head -n 1)
               
-              if [ -n "$target_dir" ]; then
-                # Generate filename: Timestamp_TargetKey.Extension
-                timestamp=$(date +%Y%m%d%H%M%S)
-                save_name="${timestamp}_${target_key}.${extension}"
-                
-                echo "Downloading $url to $target_dir/$save_name"
-                curl -L -o "$target_dir/$save_name" "$url"
-                
-                if [ $? -eq 0 ]; then
-                  rm "$tmp_file"
-                else
-                  echo "Failed to download $url"
-                fi
+              # If target directory not found, use fallback directory
+              if [ -z "$target_dir" ]; then
+                echo "Target directory matching '$target_key' not found. Using fallback."
+                target_dir="images/🛰No_Matched"
+                mkdir -p "$target_dir"
+              fi
+
+              # Generate filename: Timestamp_TargetKey.Extension
+              timestamp=$(date +%Y%m%d%H%M%S)
+              save_name="${timestamp}_${target_key}.${extension}"
+              
+              echo "Downloading $url to $target_dir/$save_name"
+              curl -L -o "$target_dir/$save_name" "$url"
+              
+              if [ $? -eq 0 ]; then
+                rm "$tmp_file"
               else
-                echo "Target directory matching '$target_key' not found for $tmp_file"
+                echo "Failed to download $url"
               fi
             else
               echo "Could not parse target key from $filename"
