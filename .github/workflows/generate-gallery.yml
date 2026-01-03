@@ -48,9 +48,10 @@ jobs:
             # Read content, remove newlines/returns
             content=$(cat "$tmp_file" | tr -d '\n' | tr -d '\r')
             
-            # Parse URL and Filename (format: url:filename)
-            url=${content%:*}
-            original_filename=${content##*:}
+            # Parse URL and Filename (format: url::filename)
+            # Split by double colon ::
+            url=${content%::*}
+            original_filename=${content##*::}
             
             # Extract extension from original filename (e.g. png from image.png)
             extension="${original_filename##*.}"
