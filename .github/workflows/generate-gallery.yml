@@ -65,6 +65,11 @@ jobs:
               # Use the filename extracted from content (after ::)
               save_name="$original_filename"
               
+              if [ -f "$target_dir/$save_name" ]; then
+                echo "File $target_dir/$save_name already exists. Deleting old file."
+                rm "$target_dir/$save_name"
+              fi
+              
               echo "Downloading $url to $target_dir/$save_name"
               curl -L -o "$target_dir/$save_name" "$url"
               
