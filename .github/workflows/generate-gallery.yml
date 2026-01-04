@@ -62,9 +62,8 @@ jobs:
                 mkdir -p "$target_dir"
               fi
 
-              # Generate filename: Timestamp_TargetKey.Extension
-              timestamp=$(date +%Y%m%d%H%M%S)
-              save_name="${timestamp}_${target_key}.${extension}"
+              # Use the filename extracted from content (after ::)
+              save_name="$original_filename"
               
               echo "Downloading $url to $target_dir/$save_name"
               curl -L -o "$target_dir/$save_name" "$url"
