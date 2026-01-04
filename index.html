@@ -33,13 +33,19 @@
             text-align: center;
             margin-bottom: 30px;
             padding: 40px 20px;
-            background: rgba(255, 255, 255, 0.95);
+            background: url('data/background.jpg') no-repeat center top;
+            background-size: cover;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+            /* 悬浮固定在顶部 */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         h1 {
-            color: #2c3e50;
+            color: white;
             margin-bottom: 10px;
             font-size: clamp(1.8rem, 5vw, 2.5rem);
             font-weight: 700;
@@ -66,6 +72,10 @@
             font-size: 0.5em;
             margin-left: 8px;
             vertical-align: super;
+        }
+
+        header p {
+            color: white;
         }
 
         header p a {
@@ -223,11 +233,15 @@
         </header>
 
         <div id="folders-container">
-            <div class="loading">正在加载图片...</div>
+            <div class="loading">Loading...</div>
         </div>
 
         <footer>
-            <p>致谢 BD8CKF 的开源项目 <a href="https://github.com/troilus/sstvgallery" target="_blank">SSTV Gallery</a>
+            <p><b> Thanks to</b> BD8CKF <a href="https://github.com/troilus/sstvgallery" target="_blank">SSTV
+                    Gallery</a>
+            </p>
+            <p>Cover Photograher <a href="https://www.pexels.com/zh-cn/@amel-uzunovic-440739273/" target="_blank">Amel
+                    Uzunovic</a>
             </p>
         </footer>
     </div>
@@ -276,6 +290,24 @@
 
         // 页面加载时获取数据
         loadGallery();
+
+        // 背景图片视差滚动效果
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+
+            // 计算页面可滚动的总高度
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+            if (maxScroll > 0) {
+                // 计算当前滚动进度的百分比 (0 - 100)
+                // 0% 对应背景图顶部，100% 对应背景图底部
+                const percentage = (window.scrollY / maxScroll) * 100;
+
+                // 更新背景位置，保持水平居中
+                // 这样当页面滚动到底部时，背景图也刚好显示到底部
+                header.style.backgroundPosition = `center ${percentage}%`;
+            }
+        });
     </script>
 </body>
 

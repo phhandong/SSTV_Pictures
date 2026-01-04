@@ -27,8 +27,9 @@ def generate_gallery_data():
                         'size': stat.st_size
                     })
             
-            # 按日期排序
-            images.sort(key=lambda x: x['date'])
+            # 按文件名中的时间戳排序 (假设格式: Timestamp_SatelliteName.ext)
+            # split('_')[0] 提取下划线前面的时间戳部分
+            images.sort(key=lambda x: x['name'].split('_')[0])
             
             if images:
                 gallery_data[folder.name] = images
