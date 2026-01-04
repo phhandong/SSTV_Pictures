@@ -2,31 +2,31 @@
   "🛰ISS": [
     {
       "name": "20260103162208_ISS.png",
-      "date": "2026-01-03",
+      "date": "2026-01-04",
       "url": "images/🛰ISS/20260103162208_ISS.png",
       "size": 728764
     },
     {
       "name": "20260103162557_ISS.png",
-      "date": "2026-01-03",
+      "date": "2026-01-04",
       "url": "images/🛰ISS/20260103162557_ISS.png",
       "size": 758797
     },
     {
       "name": "20260103163440_ISS.png",
-      "date": "2026-01-03",
+      "date": "2026-01-04",
       "url": "images/🛰ISS/20260103163440_ISS.png",
       "size": 791585
     },
     {
       "name": "20260103162423_ISS.jpg",
-      "date": "2026-01-03",
+      "date": "2026-01-04",
       "url": "images/🛰ISS/20260103162423_ISS.jpg",
       "size": 391975
     },
     {
       "name": "20260103162819_ISS.png",
-      "date": "2026-01-03",
+      "date": "2026-01-04",
       "url": "images/🛰ISS/20260103162819_ISS.png",
       "size": 809043
     }
@@ -34,43 +34,43 @@
   "🛰UMKA-1 RS40S": [
     {
       "name": "20260103155623_RS40S.png",
-      "date": "2026-01-03",
+      "date": "2026-01-04",
       "url": "images/🛰UMKA-1 RS40S/20260103155623_RS40S.png",
       "size": 159430
     },
     {
       "name": "20260103120525_RS40S.jpeg",
-      "date": "2026-01-03",
+      "date": "2026-01-04",
       "url": "images/🛰UMKA-1 RS40S/20260103120525_RS40S.jpeg",
       "size": 342234
     },
     {
       "name": "20260103155654_RS40S.png",
-      "date": "2026-01-03",
+      "date": "2026-01-04",
       "url": "images/🛰UMKA-1 RS40S/20260103155654_RS40S.png",
       "size": 183535
     },
     {
       "name": "20260103160356_RS40S.jpg",
-      "date": "2026-01-03",
+      "date": "2026-01-04",
       "url": "images/🛰UMKA-1 RS40S/20260103160356_RS40S.jpg",
       "size": 344171
     },
     {
       "name": "20260103120626_RS40S.png",
-      "date": "2026-01-03",
+      "date": "2026-01-04",
       "url": "images/🛰UMKA-1 RS40S/20260103120626_RS40S.png",
       "size": 224854
     },
     {
       "name": "20260103120554_RS40S.png",
-      "date": "2026-01-03",
+      "date": "2026-01-04",
       "url": "images/🛰UMKA-1 RS40S/20260103120554_RS40S.png",
       "size": 211325
     },
     {
       "name": "20260103155621_RS40S.png",
-      "date": "2026-01-03",
+      "date": "2026-01-04",
       "url": "images/🛰UMKA-1 RS40S/20260103155621_RS40S.png",
       "size": 216419
     }
@@ -78,25 +78,31 @@
   "🛰Arcticsat-1 RS74S": [
     {
       "name": "20260103160638_RS74S.png",
-      "date": "2026-01-03",
+      "date": "2026-01-04",
       "url": "images/🛰Arcticsat-1 RS74S/20260103160638_RS74S.png",
       "size": 306584
     },
     {
       "name": "20260103102052_RS74S.png",
-      "date": "2026-01-03",
+      "date": "2026-01-04",
       "url": "images/🛰Arcticsat-1 RS74S/20260103102052_RS74S.png",
       "size": 298885
     },
     {
       "name": "20260103160607_RS74S.jpg",
-      "date": "2026-01-03",
+      "date": "2026-01-04",
       "url": "images/🛰Arcticsat-1 RS74S/20260103160607_RS74S.jpg",
       "size": 331175
     },
     {
+      "name": "20260104115226_RS74S.jpg",
+      "date": "2026-01-04",
+      "url": "images/🛰Arcticsat-1 RS74S/20260104115226_RS74S.jpg",
+      "size": 351607
+    },
+    {
       "name": "20260103140302_RS74S.jpeg",
-      "date": "2026-01-03",
+      "date": "2026-01-04",
       "url": "images/🛰Arcticsat-1 RS74S/20260103140302_RS74S.jpeg",
       "size": 259492
     }
